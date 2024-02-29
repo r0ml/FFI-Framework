@@ -12,6 +12,10 @@
 # xcodebuild -target libffi-static-Mac -configuration Release
 
 # results are in the build folder
+# in ffi.h, replace regular expression  <(ffi.*)>   with    "$1"
+# in all the Release*/include/ffi/ffi.h
+
+
 
 # rm -rf libffi.xcframework
 # xcodebuild -create-xcframework -library Release-appletvos/libffi.a -headers Release-appletvos/include -library Release-iphoneos/libffi.a -headers Release-iphoneos/include -library Release/libffi.a -headers Release/include -output libffi.xcframework
