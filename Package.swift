@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "ffi",
+    name: "FFI-Framework",
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
