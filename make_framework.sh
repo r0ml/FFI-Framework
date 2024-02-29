@@ -15,13 +15,16 @@
 # in ffi.h, replace regular expression  <(ffi.*)>   with    "$1"
 # in all the Release*/include/ffi/ffi.h
 
+# in directory build:
+# ls **/*.h | xargs sed -I '' 's/<\(ffi.*\)>/"\1"/'
 
 
-# rm -rf libffi.xcframework
-# xcodebuild -create-xcframework -library Release-appletvos/libffi.a -headers Release-appletvos/include -library Release-iphoneos/libffi.a -headers Release-iphoneos/include -library Release/libffi.a -headers Release/include -output libffi.xcframework
+rm -rf libffi.xcframework
+xcodebuild -create-xcframework -library Release-appletvos/libffi.a -headers Release-appletvos/include -library Release-iphoneos/libffi.a -headers Release-iphoneos/include -library Release/libffi.a -headers Release/include -output libffi.xcframework
 
-# rm libffi.xcframework.zip
-# zip -r libffi.xcframework.zip libffi.xcframework
+rm libffi.xcframework.zip
+zip -r libffi.xcframework.zip libffi.xcframework
+
 # swift package compute-checksum libffi.xcframework.zip | xargs -I '{}' sed -I '' 's/\(checksum: "\).*\("\)/\1{}\2/' Package.swift
 
 
