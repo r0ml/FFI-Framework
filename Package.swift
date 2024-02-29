@@ -16,7 +16,7 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
     //  .binaryTarget(name: "ffi", path: "libffi.xcframework"),
       .binaryTarget(name: "ffi",
-                    url: "https://github.com/r0ml/FFI-Framework/releases/download/latest/libffi.xcframework.zip",
+                    url: "https://github.com/r0ml/FFI-Framework/releases/download/0.1/libffi.xcframework.zip",
                     checksum: "adde374c29a63d414077327e060223cbe49e58cd9ed628b4d3cea37c4851220e"
                    )
     ]
