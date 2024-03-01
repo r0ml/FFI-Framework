@@ -7,20 +7,27 @@
 # comment out line 21 of darwin_common/include/fficonfig.h
 # comment out line 21 of darwin_common/include/ffitarget.h
 # comment out line 21 of darwin_common/include/ffi.h
-# xcodebuild -target libffi-iOS -configuration Release
-# xcodebuild -target libffi-tvOS -configuration Release
+
+
+xcodebuild -scheme libffi-iOS -configuration Release -destination "generic/platform=iOS Simulator" BUILD_DIR=build
+xcodebuild -scheme libffi-iOS -configuration Release -destination "generic/platform=iOS" BUILD_DIR=build
+xcodebuild -scheme libffi-tvOS -configuration Release -destination "generic/platform=tvOS Simulator" BUILD_DIR=build
+xcodebuild -scheme libffi-tvOS -configuration Release -destination "generic/platform=tvOS" BUILD_DIR=build
+xcodebuild -scheme libffi-iOS -configuration Release -destination "platform=macOS,variant=Mac Catalyst" BUILD_DIR=build
+# xcodebuild -scheme libffi-iOS -configuration Release -destination "platform=macOS,variant=Designed for iPad" BUILD_DIR=build
 # xcodebuild -target libffi-static-Mac -configuration Release
+
 
 # results are in the build folder
 # in ffi.h, replace regular expression  <(ffi.*)>   with    "$1"
 # in all the Release*/include/ffi/ffi.h
 
-# in directory build:
-# ls **/*.h | xargs sed -I '' 's/<\(ffi.*\)>/"\1"/'
+cd build
 
+ls **/*.h | xargs sed -I '' 's/<\(ffi.*\)>/"\1"/'
 
 rm -rf libffi.xcframework
-xcodebuild -create-xcframework -library Release-appletvos/libffi.a -headers Release-appletvos/include -library Release-iphoneos/libffi.a -headers Release-iphoneos/include -library Release/libffi.a -headers Release/include -output libffi.xcframework
+xcodebuild -create-xcframework -library Release-appletvos/libffi.a -headers Release-appletvos/include -library Release-iphoneos/libffi.a -headers Release-iphoneos/include -library Release-iphonesimulator/libffi.a -headers Release-iphonesimulator/include -library Release-maccatalyst/libffi.a -headers Release-maccatalyst/include -output libffi.xcframework
 
 rm libffi.xcframework.zip
 zip -r libffi.xcframework.zip libffi.xcframework
